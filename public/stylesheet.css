@@ -1,0 +1,247 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: #0f0f10;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* HERO */
+
+.hero {
+  min-height: 100vh;
+  padding: 24px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,0.5),
+      rgba(0,0,0,0.9)
+    ),
+    url("https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=1200&auto=format&fit=crop")
+    center/cover;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.profile {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  background: #ff7a00;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
+}
+
+.hero-content {
+  margin-top: auto;
+  padding-bottom: 40px;
+}
+
+.tag {
+  background: rgba(255,255,255,0.1);
+
+  display: inline-block;
+
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  font-size: 0.8rem;
+
+  margin-bottom: 16px;
+}
+
+h1 {
+  font-size: 3rem;
+  line-height: 0.95;
+
+  margin-bottom: 16px;
+
+  font-weight: 800;
+}
+
+.subtext {
+  color: rgba(255,255,255,0.8);
+
+  line-height: 1.5;
+
+  margin-bottom: 28px;
+
+  max-width: 350px;
+}
+
+.cta {
+  background: #ff7a00;
+  color: white;
+
+  border: none;
+
+  width: 100%;
+
+  padding: 18px;
+
+  border-radius: 18px;
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow: 0 10px 30px rgba(255,122,0,0.4);
+}
+
+/* GAMES */
+
+.games-section {
+  padding: 24px;
+
+  margin-top: -20px;
+
+  border-radius: 30px 30px 0 0;
+
+  background: #171717;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+
+  margin-bottom: 18px;
+}
+
+.game-card {
+  background: #222;
+
+  border-radius: 22px;
+
+  padding: 18px;
+
+  margin-bottom: 16px;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.game-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 5px;
+  height: 100%;
+
+  background: #ff7a00;
+}
+
+.court-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+
+  margin-bottom: 6px;
+}
+
+.details {
+  color: rgba(255,255,255,0.7);
+
+  font-size: 0.9rem;
+
+  margin-bottom: 14px;
+}
+
+.players {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.avatars {
+  display: flex;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+
+  background: #444;
+
+  border: 2px solid #222;
+
+  margin-left: -10px;
+}
+
+.join-btn {
+  background: #2f2f2f;
+  color: white;
+
+  border: none;
+
+  padding: 10px 18px;
+
+  border-radius: 12px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+/* NAVIGATION */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+
+  width: 100%;
+
+  background: rgba(20,20,20,0.95);
+
+  display: flex;
+  justify-content: space-around;
+
+  padding: 16px 0;
+
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.nav-item {
+  color: rgba(255,255,255,0.5);
+
+  font-size: 0.85rem;
+
+  text-align: center;
+}
+
+.nav-item.active {
+  color: #ff7a00;
+  font-weight: 700;
+}
