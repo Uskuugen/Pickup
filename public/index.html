@@ -26,6 +26,13 @@
             <div class="logo">HOOPRUN</div>
             <div class="profile">U</div>
         </div>
+        <div class="user-bar">
+            Logged in as:
+            <span id="current-user"></span>
+            <button id="change-user-btn">
+                Change
+            </button>
+        </div>
 
         <div class="hero-content">
             <div class="tag">🏀 Boise Pickup Games</div>
@@ -39,71 +46,50 @@
                 Join local basketball games, meet hoopers nearby,
                 and never miss a good run again.
             </p>
-
-            <button class="cta">Find Games Near Me</button>
         </div>
     </section>
 
     <section class="games-section">
+        <div class="create-game-form">
+
+            <h2>Host a Run</h2>
+
+            <input type="text" id="court" placeholder="Court Name">
+
+            <input type="text" id="type" placeholder="5v5">
+
+            <input type="text" id="level" placeholder="Competitive">
+
+            <input type="text" id="time" placeholder="7:30 PM">
+
+            <input type="number" id="maxPlayers" placeholder="10">
+
+            <input type="text" id="city" placeholder="City">
+
+            <input type="text" id="state" placeholder="State">
+
+            <button id="create-btn">
+                Host Run
+            </button>
+
+        </div>
 
         <div class="section-title">
             Tonight's Runs
         </div>
 
-        <div class="game-card">
-            <div class="court-name">
-                Julia Davis Park
-            </div>
 
-            <div class="details">
-                5v5 • Competitive • 7:30 PM
-            </div>
-
-            <div class="players">
-                <div class="avatars">
-                    <div class="avatar"></div>
-                    <div class="avatar"></div>
-                    <div class="avatar"></div>
-                    <div class="avatar"></div>
-                </div>
-
-                <button class="join-btn">
-                    Join
-                </button>
-            </div>
-        </div>
-
-        <div class="game-card">
-            <div class="court-name">
-                Boise State Rec Center
-            </div>
-
-            <div class="details">
-                3v3 • Chill Runs • 9:00 PM
-            </div>
-
-            <div class="players">
-                <div class="avatars">
-                    <div class="avatar"></div>
-                    <div class="avatar"></div>
-                    <div class="avatar"></div>
-                </div>
-
-                <button class="join-btn">
-                    Join
-                </button>
-            </div>
-        </div>
+        <div class="games-container"></div>
 
     </section>
 
     <div class="bottom-nav">
         <div class="nav-item active">Home</div>
-        <div class="nav-item">Games</div>
+        <div class="nav-item">Host</div>
         <div class="nav-item">Courts</div>
-        <div class="nav-item">Profile</div>
+        <div class="nav-item">Me</div>
     </div>
-    
+
     <!-- Place this before closing body tag -->
     <script src="main.js"></script>
 </body>

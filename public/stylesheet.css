@@ -10,7 +10,33 @@ body {
   color: white;
   overflow-x: hidden;
 }
+.card-header{
+    margin-bottom:20px;
+}
 
+.host{
+    margin-bottom:12px;
+}
+
+.time{
+    margin-bottom:12px;
+}
+
+.player-count{
+    margin-bottom:10px;
+}
+
+.progress-bar{
+    margin:14px 0 18px;
+}
+
+.joined-players{
+    margin-bottom:20px;
+}
+
+.button-row{
+    margin-top:20px;
+}
 /* HERO */
 
 .hero {
@@ -18,13 +44,10 @@ body {
   padding: 24px;
 
   background:
-    linear-gradient(
-      180deg,
-      rgba(0,0,0,0.5),
-      rgba(0,0,0,0.9)
-    ),
-    url("https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=1200&auto=format&fit=crop")
-    center/cover;
+    linear-gradient(180deg,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.9)),
+    url("https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=1200&auto=format&fit=crop") center/cover;
 
   display: flex;
   flex-direction: column;
@@ -35,6 +58,39 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.user-bar {
+  margin-top: 12px;
+  padding: 10px 14px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  border-radius: 12px;
+
+  font-size: 0.9rem;
+}
+
+#change-user-btn {
+
+  margin-left: auto;
+
+  background: #ff7a00;
+
+  border: none;
+
+  color: white;
+
+  padding: 8px 12px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+}
+
+#current-user {
+  font-weight: bold;
+  color: #ff7a00;
 }
 
 .logo {
@@ -64,7 +120,7 @@ body {
 }
 
 .tag {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
 
   display: inline-block;
 
@@ -87,7 +143,7 @@ h1 {
 }
 
 .subtext {
-  color: rgba(255,255,255,0.8);
+  color: rgba(255, 255, 255, 0.8);
 
   line-height: 1.5;
 
@@ -113,7 +169,117 @@ h1 {
 
   cursor: pointer;
 
-  box-shadow: 0 10px 30px rgba(255,122,0,0.4);
+  box-shadow: 0 10px 30px rgba(255, 122, 0, 0.4);
+}
+
+/* CREATE GAME FORM */
+
+.create-game-form {
+
+  background: #222;
+
+  border-radius: 22px;
+
+  padding: 18px;
+
+  margin-bottom: 20px;
+
+  position: relative;
+
+  overflow: hidden;
+
+}
+
+/* Orange accent strip */
+
+.create-game-form::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 5px;
+  height: 100%;
+
+  background: #ff7a00;
+
+}
+
+.create-game-form h2 {
+
+  font-size: 1.1rem;
+  font-weight: 700;
+
+  margin-bottom: 18px;
+
+}
+
+.create-game-form input {
+
+  width: 100%;
+
+  padding: 14px;
+
+  margin-bottom: 12px;
+
+  border: none;
+  outline: none;
+
+  border-radius: 14px;
+
+  background: #2f2f2f;
+
+  color: white;
+
+  font-size: 0.95rem;
+
+  transition: 0.2s ease;
+
+}
+
+.create-game-form input:focus {
+
+  background: #3a3a3a;
+
+  transform: scale(1.01);
+
+}
+
+#create-btn {
+
+  width: 100%;
+
+  background: #ff7a00;
+  color: white;
+
+  border: none;
+
+  padding: 16px;
+
+  border-radius: 16px;
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  margin-top: 6px;
+
+  box-shadow: 0 10px 25px rgba(255, 122, 0, 0.25);
+
+  transition: 0.2s ease;
+
+}
+
+#create-btn:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 14px 30px rgba(255, 122, 0, 0.35);
+
 }
 
 /* GAMES */
@@ -140,7 +306,7 @@ h1 {
 
   border-radius: 22px;
 
-  padding: 18px;
+  padding: 24px;
 
   margin-bottom: 16px;
 
@@ -170,7 +336,7 @@ h1 {
 }
 
 .details {
-  color: rgba(255,255,255,0.7);
+  color: rgba(255, 255, 255, 0.7);
 
   font-size: 0.9rem;
 
@@ -200,7 +366,11 @@ h1 {
   margin-left: -10px;
 }
 
-.join-btn {
+
+.delete-btn,
+.edit-btn,
+.join-btn,
+.leave-btn {
   background: #2f2f2f;
   color: white;
 
@@ -213,6 +383,89 @@ h1 {
   font-weight: 600;
 
   cursor: pointer;
+
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+
+  background: #2d2d2d;
+
+  border-radius: 999px;
+
+  overflow: hidden;
+
+  margin: 12px 0 18px;
+}
+
+.progress-fill {
+
+  height: 100%;
+
+  background: linear-gradient(90deg,
+      #ff7a00,
+      #ffb347);
+
+  border-radius: 999px;
+
+  transition: .35s;
+}
+
+.button-row {
+
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 18px;
+}
+
+.join-btn{
+    background:#ff7a00;
+    color:white;
+}
+
+.leave-btn{
+    background:#555;
+    color:white;
+}
+
+.edit-btn{
+    background:#276ef1;
+    color:white;
+}
+
+.delete-btn{
+    background:#d63031;
+    color:white;
+}
+
+.level-badge {
+
+  padding: 6px 14px;
+
+  border-radius: 999px;
+
+  font-size: .8rem;
+
+  font-weight: 700;
+}
+
+.level-badge.casual {
+  background: #2f6d3c;
+}
+
+.level-badge.intermediate {
+  background: #9b6d16;
+}
+
+.level-badge.competitive {
+  background: #b52a2a;
+}
+
+.level-badge.chill {
+  background: #3b82f6;
 }
 
 /* NAVIGATION */
@@ -223,18 +476,18 @@ h1 {
 
   width: 100%;
 
-  background: rgba(20,20,20,0.95);
+  background: rgba(20, 20, 20, 0.95);
 
   display: flex;
   justify-content: space-around;
 
   padding: 16px 0;
 
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .nav-item {
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
 
   font-size: 0.85rem;
 
