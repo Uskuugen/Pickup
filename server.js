@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const path = require("path");
-const uri = "mongodb+srv://ushukhchuluun_db_user:AC9Zro8qyAx0PKB7@pickup.fko801g.mongodb.net/";
+
 
 
 const Game = require("./models/Game");
