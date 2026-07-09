@@ -1,5 +1,6 @@
 //----------------username logic---------------//
 let username = localStorage.getItem("username");
+let editingGame = null;
 
 if (!username) {
 
@@ -132,6 +133,11 @@ async function fetchGames() {
 
         const games = await response.json();
 
+        if (!response.ok) {
+            console.error(games);
+            return;
+        }
+
         renderGames(games);
         console.log("Games:", games);
 
@@ -152,77 +158,45 @@ async function fetchGames() {
 function renderGames(games) {
     const container = document.querySelector(".games-container");
 
-    container.innerHTML = "";
+    container.innerHTML =
+        `
+
+    <div class="empty-state">
+    Loading games...
+    </div>
+    `;
+
+    // Empty state
+    if (games.length === 0) {
+
+        container.innerHTML = `
+            <div class="empty-state">
+                <h3>🏀 No pickup games yet</h3>
+                <p>Host the first run in your area.</p>
+            </div>
+        `;
+
+        return;
+
+    }
 
     games.forEach(game => {
 
         const hasJoined = game.joinedPlayers.includes(username);
-        const isHost =
-            game.host === username;
+        //const isHost =
+        // game.host === username;
         const card = document.createElement("div");
 
         card.classList.add("game-card");
 
         card.dataset.id = game._id;
-
-        /*card.innerHTML = `
-    <div class="court-name">${game.court}</div>
-
-    <div class="details">
-        Hosted by ${game.host}
-    </div>
-
-    <div class="details">
-        ${game.type} • ${game.level}
-    </div>
-
-    <div class="player-count">
-        ${game.players}/${game.maxPlayers} Players
-    </div>
-    <div class="joined-players">
-    Joined:
-        ${game.joinedPlayers.join(", ")}
-    </div>
-
-    <div class="details">
-        ${game.time}
-    </div>
-    ${isHost ? `
-    <div class="host-badge">
-        Hosting
-    </div>
-` :
-                hasJoined ? `
-    <button class="leave-btn">
-        Leave Run
-    </button>
-` : `
-    <button class="join-btn">
-        Join Run
-    </button>
-`}
-
-
-    ${game.host === username ? `
-        <button class="delete-btn">
-            Delete Run
-        </button>
-    ` : ""}
-    ${game.host === username ? `
-    <button class="edit-btn">
-        Edit Run
-    </button>
-` : ""}
-`;*/
-card.innerHTML = `
+        card.innerHTML = `
 <div class="card-header">
     <div>
         <div class="court-name">🏀 ${game.court}</div>
-        <div class="location">
-            📍 ${game.location.city}, ${game.location.state}
-        </div>
     </div>
-
+</div>
+<div class="level">
     <span class="level-badge ${game.level.toLowerCase()}">
         ${game.level}
     </span>
@@ -232,48 +206,41 @@ card.innerHTML = `
     👤 Hosted by <strong>${game.host}</strong>
 </div>
 
+<div class="game-type">
+        ${game.type}
+</div>
+
 <div class="time">
     🕒 ${game.time}
 </div>
 
-<div class="player-count">
-    👥 ${game.players}/${game.maxPlayers} Players
-</div>
-
-<div class="progress-bar">
-    <div
-        class="progress-fill"
-        style="width:${(game.players/game.maxPlayers)*100}%">
-    </div>
-</div>
-
 <div class="joined-players">
     <strong>Joined:</strong><br>
-    ${game.joinedPlayers.join(" • ")}
+    ${game.joinedPlayers.length ?
+                game.joinedPlayers.join(" • ")
+                : "Nobody yet"}
 </div>
 
 <div class="button-row">
 
-${
-hasJoined
-?
-`
+${hasJoined
+                ?
+                `
 <button class="leave-btn">
 Leave Run
 </button>
 `
-:
-`
+                :
+                `
 <button class="join-btn">
 Join Run
 </button>
 `
-}
+            }
 
-${
-game.host===username
-?
-`
+${game.host === username
+                ?
+                `
 <button class="edit-btn">
 ✏ Edit
 </button>
@@ -282,9 +249,9 @@ game.host===username
 🗑 Delete
 </button>
 `
-:
-""
-}
+                :
+                ""
+            }
 
 </div>
 `;
@@ -336,40 +303,43 @@ game.host===username
         container.appendChild(card);
     });
 
-    gsap.from(".game-card", {
+    /*gsap.from(".game-card", {
         opacity: 0,
         y: 50,
         stagger: 0.2,
         duration: 0.8,
         delay: 1.3
-    });
+    });*/
 }
 
 // Create a new game
 async function createGame() {
 
     const newGame = {
-        court: document.querySelector("#court").value,
+        court: document.querySelector("#court").value.trim(),
 
         type: document.querySelector("#type").value,
 
         level: document.querySelector("#level").value,
 
-        time: document.querySelector("#time").value,
+        time: document.querySelector("#time").value.trim(),
 
         players: 1,
 
-        maxPlayers: Number(
-            document.querySelector("#maxPlayers").value
-        ),
-
         host: username,
-        joinedPlayers: [username],
-        location: {
-            city: document.querySelector("#city").value,
-            state: document.querySelector("#state").value
-        }
+        joinedPlayers: [username]
     };
+
+    if (!newGame.court) {
+        alert("Please enter a court.");
+        return;
+    }
+    if (!newGame.time) {
+        alert("Please enter a time.");
+        return;
+    }
+
+    console.log(newGame);
 
     try {
 
@@ -385,18 +355,25 @@ async function createGame() {
 
         const data = await response.json();
 
+        if (!response.ok) {
+            console.error(data);
+            alert(data.error);
+            return;
+        }
+
         console.log("Game created:", data);
+
+
+
+        //console.log("Game created:", data);
 
         fetchGames();
 
         // Clear inputs
         document.querySelector("#court").value = "";
-        document.querySelector("#type").value = "";
-        document.querySelector("#level").value = "";
+        document.querySelector("#type").selectedIndex = 4;
+        document.querySelector("#level").selectedIndex = 0;
         document.querySelector("#time").value = "";
-        document.querySelector("#maxPlayers").value = "";
-        document.querySelector("#city").value = "";
-        document.querySelector("#state").value = "";
 
     } catch (error) {
 
@@ -441,9 +418,6 @@ async function joinGame(gameId) {
         if (!card) return;
 
         const playerCount = card.querySelector(".player-count");
-
-        playerCount.textContent =
-            `${data.players}/${data.maxPlayers} Players`;
 
         // Small feedback animation
         gsap.fromTo(playerCount,
@@ -558,21 +532,57 @@ async function editGame(game) {
 
     if (!newCourt) return;
 
-    const newType =
+    /*const newType =
         prompt("Game Type", game.type);
 
-    if (!newType) return;
+    if (!newType) return;*/
+
+    const gameTypes = [
+        "1v1",
+        "2v2",
+        "3v3",
+        "4v4",
+        "5v5",
+        "Shooting Around"
+    ];
+
+    const newType = prompt(
+        `Game Type:\n${gameTypes.join(", ")}`,
+        game.type
+    );
+
+    if (!newType || !gameTypes.includes(newType)) {
+        alert("Please enter one of the listed game types.");
+        return;
+    }
 
     const newTime =
         prompt("New time:", game.time);
 
     if (!newTime) return;
 
-    const newLevel =
+    /*const newLevel =
         prompt("New level:", game.level);
 
-    if (!newLevel) return;
-    
+    if (!newLevel) return;*/
+
+    const levels = [
+        "Open",
+        "Casual",
+        "Intermediate",
+        "Competitive"
+    ];
+
+    const newLevel = prompt(
+        `Skill Level:\n${levels.join(", ")}`,
+        game.level
+    );
+
+    if (!newLevel || !levels.includes(newLevel)) {
+        alert("Please enter a valid skill level.");
+        return;
+    }
+
     try {
 
         const response = await fetch(

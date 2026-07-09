@@ -56,17 +56,27 @@
 
             <input type="text" id="court" placeholder="Court Name">
 
-            <input type="text" id="type" placeholder="5v5">
+            <label for="type">Game Type</label>
 
-            <input type="text" id="level" placeholder="Competitive">
+            <select id="type">
+                <option>1v1</option>
+                <option>2v2</option>
+                <option>3v3</option>
+                <option>4v4</option>
+                <option selected>5v5</option>
+                <option>Shooting Around</option>
+            </select>
+
+            <label for="level">Skill Level</label>
+
+            <select id="level">
+                <option value="Open">Open</option>
+                <option value="Casual">Casual</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Competitive">Competitive</option>
+            </select>
 
             <input type="text" id="time" placeholder="7:30 PM">
-
-            <input type="number" id="maxPlayers" placeholder="10">
-
-            <input type="text" id="city" placeholder="City">
-
-            <input type="text" id="state" placeholder="State">
 
             <button id="create-btn">
                 Host Run
@@ -81,14 +91,46 @@
 
         <div class="games-container"></div>
 
-    </section>
+        <div id="edit-modal" class="modal hidden">
 
-    <div class="bottom-nav">
-        <div class="nav-item active">Home</div>
-        <div class="nav-item">Host</div>
-        <div class="nav-item">Courts</div>
-        <div class="nav-item">Me</div>
+    <div class="modal-content">
+
+        <h2>Edit Run</h2>
+
+        <input id="edit-court" type="text" placeholder="Court">
+
+        <label for="edit-type">Game Type</label>
+
+        <select id="edit-type">
+            <option>1v1</option>
+            <option>2v2</option>
+            <option>3v3</option>
+            <option>4v4</option>
+            <option>5v5</option>
+            <option>Shooting Around</option>
+        </select>
+
+        <label for="edit-level">Skill Level</label>
+
+        <select id="edit-level">
+            <option>Open</option>
+            <option>Casual</option>
+            <option>Intermediate</option>
+            <option>Competitive</option>
+        </select>
+
+        <input id="edit-time" type="text" placeholder="7:00 PM">
+
+        <div class="modal-buttons">
+            <button id="save-edit">Save Changes</button>
+            <button id="cancel-edit">Cancel</button>
+        </div>
+
     </div>
+
+</div>
+
+    </section>
 
     <!-- Place this before closing body tag -->
     <script src="main.js"></script>

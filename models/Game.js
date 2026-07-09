@@ -25,25 +25,6 @@ const gameSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-
-  maxPlayers: {
-    type: Number,
-    required: true
-  },
-
-  location: {
-
-    city: {
-      type: String,
-      default: "Boise"
-    },
-
-    state: {
-      type: String,
-      default: "ID"
-    }
-
-  },
   host: {
     type: String,
     required: true

@@ -2,12 +2,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const path = require("path");
-
+const uri = "mongodb+srv://ushukhchuluun_db_user:Uskuugen123@pickup.fko801g.mongodb.net/";
 
 
 const Game = require("./models/Game");
 
 dotenv.config();
+console.log("URI:", process.env.MONGODB_URI);
 const app = express();
 app.use(express.json());
 app.use(express.static("public"));
@@ -120,12 +121,27 @@ app.put("/games/:id", async (req, res) => {
 
 
 app.post("/games", async (req, res) => {
+
+  console.log(req.body);
+
+  if (
+    !req.body.court ||
+    !req.body.type ||
+    !req.body.time
+  ) {
+    return res.status(400).json({
+      error: "Missing required fields."
+    });
+  }
+
   try {
+    
     const game = new Game(req.body);
 
     await game.save();
 
     res.status(201).json(game);
+
   } catch (err) {
     res.status(500).json({
       error: err.message
@@ -147,12 +163,6 @@ app.post("/games/:id/join", async (req, res) => {
     if (!game) {
       return res.status(404).json({
         error: "Game not found"
-      });
-    }
-
-    if (game.players >= game.maxPlayers) {
-      return res.status(400).json({
-        error: "Game full"
       });
     }
 
