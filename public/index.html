@@ -92,9 +92,49 @@
         <div class="games-container"></div>
 
         <div id="edit-modal" class="modal hidden">
-</div>
+        </div>
 
     </section>
+
+    <div id="edit-modal" class="modal hidden">
+
+        <div class="modal-content">
+
+            <h2>Edit Run</h2>
+
+            <input type="text" id="edit-court" placeholder="Court">
+
+            <label for="edit-type">Game Type</label>
+            <select id="edit-type">
+                <option>1v1</option>
+                <option>2v2</option>
+                <option>3v3</option>
+                <option>4v4</option>
+                <option>5v5</option>
+                <option>Shooting Around</option>
+            </select>
+
+            <label for="edit-level">Skill Level</label>
+            <select id="edit-level">
+                <option>Open</option>
+                <option>Casual</option>
+                <option>Intermediate</option>
+                <option>Competitive</option>
+            </select>
+
+            <input type="text" id="edit-time" placeholder="7:30 PM">
+
+            <div class="button-row">
+                <button id="save-edit-btn">Save</button>
+                <button id="cancel-edit-btn">Cancel</button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
 
     <!-- Place this before closing body tag -->
     <script src="main.js"></script>

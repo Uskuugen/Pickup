@@ -525,68 +525,132 @@ async function deleteGame(gameId) {
 
 }
 
-async function editGame(game) {
+function editGame(game) {
 
-    const newCourt =
-        prompt("Court:", game.court);
+    editingGame = game;
 
-    if (!newCourt) return;
+    document.querySelector("#edit-court").value = game.court;
+    document.querySelector("#edit-type").value = game.type;
+    document.querySelector("#edit-level").value = game.level;
+    document.querySelector("#edit-time").value = game.time;
 
-    /*const newType =
-        prompt("Game Type", game.type);
+    document.querySelector("#edit-modal")
+        .classList.remove("hidden");
 
-    if (!newType) return;*/
+}
 
-    const gameTypes = [
-        "1v1",
-        "2v2",
-        "3v3",
-        "4v4",
-        "5v5",
-        "Shooting Around"
-    ];
+// async function editGame(game) {
 
-    const newType = prompt(
-        `Game Type:\n${gameTypes.join(", ")}`,
-        game.type
-    );
+//     const newCourt =
+//         prompt("Court:", game.court);
 
-    if (!newType || !gameTypes.includes(newType)) {
-        alert("Please enter one of the listed game types.");
-        return;
-    }
+//     if (!newCourt) return;
 
-    const newTime =
-        prompt("New time:", game.time);
+//     /*const newType =
+//         prompt("Game Type", game.type);
 
-    if (!newTime) return;
+//     if (!newType) return;*/
 
-    /*const newLevel =
-        prompt("New level:", game.level);
+//     const gameTypes = [
+//         "1v1",
+//         "2v2",
+//         "3v3",
+//         "4v4",
+//         "5v5",
+//         "Shooting Around"
+//     ];
 
-    if (!newLevel) return;*/
+//     const newType = prompt(
+//         `Game Type:\n${gameTypes.join(", ")}`,
+//         game.type
+//     );
 
-    const levels = [
-        "Open",
-        "Casual",
-        "Intermediate",
-        "Competitive"
-    ];
+//     if (!newType || !gameTypes.includes(newType)) {
+//         alert("Please enter one of the listed game types.");
+//         return;
+//     }
 
-    const newLevel = prompt(
-        `Skill Level:\n${levels.join(", ")}`,
-        game.level
-    );
+//     const newTime =
+//         prompt("New time:", game.time);
 
-    if (!newLevel || !levels.includes(newLevel)) {
-        alert("Please enter a valid skill level.");
-        return;
-    }
+//     if (!newTime) return;
+
+//     /*const newLevel =
+//         prompt("New level:", game.level);
+
+//     if (!newLevel) return;*/
+
+//     const levels = [
+//         "Open",
+//         "Casual",
+//         "Intermediate",
+//         "Competitive"
+//     ];
+
+//     const newLevel = prompt(
+//         `Skill Level:\n${levels.join(", ")}`,
+//         game.level
+//     );
+
+//     if (!newLevel || !levels.includes(newLevel)) {
+//         alert("Please enter a valid skill level.");
+//         return;
+//     }
+
+//     try {
+
+//         const response = await fetch(
+//             `${API_URL}/games/${game._id}`,
+//             {
+//                 method: "PUT",
+
+//                 headers: {
+//                     "Content-Type": "application/json"
+//                 },
+
+//                 body: JSON.stringify({
+
+//                     username,
+
+//                     updates: {
+
+//                         time: newTime,
+//                         level: newLevel,
+//                         type: newType,
+//                         court: newCourt
+
+//                     }
+
+//                 })
+
+//             }
+//         );
+
+//         const updatedGame =
+//             await response.json();
+
+//         console.log(
+//             "Updated:",
+//             updatedGame
+//         );
+
+//         fetchGames();
+
+//     } catch (error) {
+
+//         console.error(error);
+
+//     }
+
+// }
+
+document.querySelector("#save-edit-btn")
+.addEventListener("click", async () => {
 
     try {
 
         const response = await fetch(
-            `${API_URL}/games/${game._id}`,
+            `${API_URL}/games/${editingGame._id}`,
             {
                 method: "PUT",
 
@@ -600,10 +664,13 @@ async function editGame(game) {
 
                     updates: {
 
-                        time: newTime,
-                        level: newLevel,
-                        type: newType,
-                        court: newCourt
+                        court: document.querySelector("#edit-court").value,
+
+                        type: document.querySelector("#edit-type").value,
+
+                        level: document.querySelector("#edit-level").value,
+
+                        time: document.querySelector("#edit-time").value
 
                     }
 
@@ -612,23 +679,30 @@ async function editGame(game) {
             }
         );
 
-        const updatedGame =
-            await response.json();
+        const data = await response.json();
 
-        console.log(
-            "Updated:",
-            updatedGame
-        );
+        console.log(data);
+
+        document.querySelector("#edit-modal")
+            .classList.add("hidden");
 
         fetchGames();
 
-    } catch (error) {
+    } catch (err) {
 
-        console.error(error);
+        console.error(err);
 
     }
 
-}
+});
+
+document.querySelector("#cancel-edit-btn")
+.addEventListener("click", () => {
+
+    document.querySelector("#edit-modal")
+        .classList.add("hidden");
+
+});
 
 document.querySelector("#create-btn")
     .addEventListener("click", createGame);
