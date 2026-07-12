@@ -722,3 +722,84 @@ h1 {
     }
 
   }
+  /* Floating Scroll Button */
+
+.scroll-latest{
+
+    position:fixed;
+
+    right:22px;
+    bottom:28px;
+
+    width:58px;
+    height:58px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#ff7a00;
+    color:white;
+
+    font-size:26px;
+
+    cursor:pointer;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.35);
+
+    z-index:999;
+
+    transition:.25s;
+}
+
+.scroll-latest:hover{
+
+    transform:scale(1.08);
+
+}
+
+.scroll-latest.hidden{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+}
+
+
+/* Toast */
+
+.toast{
+
+    position:fixed;
+
+    left:50%;
+    bottom:100px;
+
+    transform:translateX(-50%);
+
+    background:#222;
+
+    color:white;
+
+    padding:14px 22px;
+
+    border-radius:999px;
+
+    font-weight:600;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.35);
+
+    z-index:9999;
+
+    transition:.3s;
+}
+
+.toast.hidden{
+
+    opacity:0;
+
+    visibility:hidden;
+
+}

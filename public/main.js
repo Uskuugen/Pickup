@@ -363,11 +363,11 @@ async function createGame() {
 
         console.log("Game created:", data);
 
+        await fetchGames();
 
-
-        //console.log("Game created:", data);
-
-        fetchGames();
+        showToast();
+        
+        showScrollButton();
 
         // Clear inputs
         document.querySelector("#court").value = "";
@@ -643,6 +643,44 @@ function editGame(game) {
 //     }
 
 // }
+
+function showToast() {
+
+    const toast = document.querySelector("#toast");
+
+    toast.classList.remove("hidden");
+
+    setTimeout(() => {
+        toast.classList.add("hidden");
+    }, 2500);
+
+}
+
+function showScrollButton() {
+
+    document
+        .querySelector("#scroll-latest-btn")
+        .classList.remove("hidden");
+
+}
+
+document.querySelector("#scroll-latest-btn")
+.addEventListener("click", () => {
+
+    const cards = document.querySelectorAll(".game-card");
+
+    if (cards.length === 0) return;
+
+    cards[cards.length - 1].scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+    document
+        .querySelector("#scroll-latest-btn")
+        .classList.add("hidden");
+
+});
 
 document.querySelector("#save-edit-btn")
 .addEventListener("click", async () => {
