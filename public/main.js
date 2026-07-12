@@ -681,7 +681,10 @@ document.querySelector("#save-edit-btn")
 
         const data = await response.json();
 
-        console.log(data);
+        if(!response.ok){
+            alert(data.error);
+            return;
+        }
 
         document.querySelector("#edit-modal")
             .classList.add("hidden");

@@ -342,7 +342,7 @@ h1 {
   background: #ff7a00;
 }
 
-.game-type{
+.game-type {
   margin-bottom: 12px;
 }
 
@@ -583,142 +583,142 @@ h1 {
   margin-left: auto;
   margin-right: auto;
 }
-@media (min-width: 768px){
 
-  body{
-      background:#111;
+@media (min-width: 768px) {
+
+  body {
+    background: #111;
   }
 
-  .hero{
-      padding:40px;
+  .hero {
+    padding: 40px;
   }
 
-  .games-section{
-      border-radius:30px;
+  .games-section {
+    border-radius: 30px;
   }
 
-  .bottom-nav{
-      max-width:650px;
-      left:50%;
-      transform:translateX(-50%);
-      border-radius:20px 20px 0 0;
+  .bottom-nav {
+    max-width: 650px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 20px 20px 0 0;
   }
-
-  .modal{
-
-    position:fixed;
-    inset:0;
-
-    background:rgba(0,0,0,.65);
-
-    display:flex;
-    align-items:flex-end;
-    justify-content:center;
-
-    z-index:999;
 
 }
+/* EDIT RUN MODAL*/
 
 .hidden{
-    display:none;
+  display: none;
 }
 
-.modal-content{
+.modal {
 
-    width:100%;
-    max-width:650px;
+    position: fixed;
 
-    background:#1d1d1d;
+    top: 0;
+    left: 0;
 
-    border-radius:28px 28px 0 0;
+    width: 100vw;
+    height: 100vh;
 
-    padding:24px;
+    background: rgba(0, 0, 0, .75);
 
-    animation:slideUp .25s ease;
+    display: flex;
 
-}
+    justify-content: center;
+    align-items: center;
 
-.modal-content h2{
+    z-index: 9999;
 
-    margin-bottom:20px;
+    opacity: 1;
+    visibility: visible;
 
-}
+    transition: .25s;
+  }
 
-.modal-content input,
-.modal-content select{
+  .modal.hidden {
 
-    width:100%;
+    opacity: 0;
 
-    padding:14px;
+    visibility: hidden;
 
-    margin-bottom:14px;
+    pointer-events: none;
 
-    border:none;
+  }
 
-    border-radius:14px;
+  .modal-content {
 
-    background:#2f2f2f;
+    width: 90%;
+    max-width: 420px;
 
-    color:white;
+    background: #222;
 
-}
+    border-radius: 24px;
 
-.modal-buttons{
+    padding: 24px;
 
-    display:flex;
+    display: flex;
+    flex-direction: column;
 
-    gap:12px;
+    gap: 14px;
 
-    margin-top:20px;
+    transform: translateY(20px);
 
-}
+    transition: .25s;
+  }
 
-#save-edit{
+  .modal:not(.hidden) .modal-content {
 
-    flex:1;
+    transform: translateY(0);
 
-    background:#ff7a00;
+  }
 
-    color:white;
 
-    border:none;
+  #save-edit-btn {
 
-    padding:15px;
+    flex: 1;
 
-    border-radius:14px;
+    background: #ff7a00;
 
-}
+    color: white;
 
-#cancel-edit{
+    border: none;
 
-    flex:1;
+    padding: 15px;
 
-    background:#444;
+    border-radius: 14px;
 
-    color:white;
+  }
 
-    border:none;
+  #cancel-edit-btn {
 
-    padding:15px;
+    flex: 1;
 
-    border-radius:14px;
+    background: #444;
 
-}
+    color: white;
 
-@keyframes slideUp{
+    border: none;
 
-    from{
+    padding: 15px;
 
-        transform:translateY(100%);
+    border-radius: 14px;
+
+  }
+
+  @keyframes slideUp {
+
+    from {
+
+      transform: translateY(100%);
 
     }
 
-    to{
+    to {
 
-        transform:translateY(0);
+      transform: translateY(0);
 
     }
 
-}
-
-}
+  }
