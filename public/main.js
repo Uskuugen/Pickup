@@ -1,6 +1,7 @@
 //----------------username logic---------------//
 let username = localStorage.getItem("username");
 let editingGame = null;
+let lastCreatedGameId = null;
 
 if (!username) {
 
@@ -361,12 +362,14 @@ async function createGame() {
             return;
         }
 
+        lastCreatedGameId = data._id;
+
         console.log("Game created:", data);
 
         await fetchGames();
 
         showToast();
-        
+
         showScrollButton();
 
         // Clear inputs
@@ -648,6 +651,8 @@ function showToast() {
 
     const toast = document.querySelector("#toast");
 
+    toast.textContent = "🏀 Game Created!";
+
     toast.classList.remove("hidden");
 
     setTimeout(() => {
@@ -665,85 +670,95 @@ function showScrollButton() {
 }
 
 document.querySelector("#scroll-latest-btn")
-.addEventListener("click", () => {
+    .addEventListener("click", () => {
 
-    const cards = document.querySelectorAll(".game-card");
-
-    if (cards.length === 0) return;
-
-    cards[cards.length - 1].scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-    });
-
-    document
-        .querySelector("#scroll-latest-btn")
-        .classList.add("hidden");
-
-});
-
-document.querySelector("#save-edit-btn")
-.addEventListener("click", async () => {
-
-    try {
-
-        const response = await fetch(
-            `${API_URL}/games/${editingGame._id}`,
-            {
-                method: "PUT",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({
-
-                    username,
-
-                    updates: {
-
-                        court: document.querySelector("#edit-court").value,
-
-                        type: document.querySelector("#edit-type").value,
-
-                        level: document.querySelector("#edit-level").value,
-
-                        time: document.querySelector("#edit-time").value
-
-                    }
-
-                })
-
-            }
+        const latestCard = document.querySelector(
+            `[data-id="${lastCreatedGameId}"]`
         );
 
-        const data = await response.json();
+        if (!latestCard) return;
 
-        if(!response.ok){
-            alert(data.error);
-            return;
+        latestCard.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+        latestCard.classList.add("flash");
+
+        setTimeout(() => {
+
+            latestCard.classList.remove("flash");
+
+        }, 700);
+
+        document
+            .querySelector("#scroll-latest-btn")
+            .classList.add("hidden");
+
+    });
+    
+document.querySelector("#save-edit-btn")
+    .addEventListener("click", async () => {
+
+        try {
+
+            const response = await fetch(
+                `${API_URL}/games/${editingGame._id}`,
+                {
+                    method: "PUT",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        username,
+
+                        updates: {
+
+                            court: document.querySelector("#edit-court").value,
+
+                            type: document.querySelector("#edit-type").value,
+
+                            level: document.querySelector("#edit-level").value,
+
+                            time: document.querySelector("#edit-time").value
+
+                        }
+
+                    })
+
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                alert(data.error);
+                return;
+            }
+
+            document.querySelector("#edit-modal")
+                .classList.add("hidden");
+
+            fetchGames();
+
+        } catch (err) {
+
+            console.error(err);
+
         }
+
+    });
+
+document.querySelector("#cancel-edit-btn")
+    .addEventListener("click", () => {
 
         document.querySelector("#edit-modal")
             .classList.add("hidden");
 
-        fetchGames();
-
-    } catch (err) {
-
-        console.error(err);
-
-    }
-
-});
-
-document.querySelector("#cancel-edit-btn")
-.addEventListener("click", () => {
-
-    document.querySelector("#edit-modal")
-        .classList.add("hidden");
-
-});
+    });
 
 document.querySelector("#create-btn")
     .addEventListener("click", createGame);
